@@ -1,0 +1,93 @@
+File name	Lab Group	Treated/Untreated	Well	Field	Channel
+CompBioPBS_DAPI_0001.tif	3	Untreated	1		DAPI
+CompBioPBS_DAPI_0002.tif	3	Untreated	2		DAPI
+CompBioPBS_DAPI_0003.tif	3	Untreated	3		DAPI
+CompBioPBS_DAPI_0004.tif	3	Untreated	4		DAPI
+CompBioPBS_GFP_0001.tif	3	Untreated	1		GFP
+CompBioPBS_GFP_0002.tif	3	Untreated	2		GFP
+CompBioPBS_GFP_0003.tif	3	Untreated	3		GFP
+CompBioPBS_GFP_0004.tif	3	Untreated	4		GFP
+CompBioPBS_RGB_0001.tif	3	Untreated	1		RGB
+CompBioPBS_RGB_0002.tif	3	Untreated	2		RGB
+CompBioPBS_RGB_0003.tif	3	Untreated	3		RGB
+CompBioPBS_RGB_0004.tif	3	Untreated	4		RGB
+CompBioPBS_TRANS_0001.tif	3	Untreated	1		TRANS
+CompBioPBS_TRANS_0002.tif	3	Untreated	2		TRANS
+CompBioPBS_TRANS_0003.tif	3	Untreated	3		TRANS
+CompBioPBS_TRANS_0004.tif	3	Untreated	4		TRANS
+CompBiotreated_DAPI_0001.tif	3	Untreated	5		DAPI
+CompBiotreated_DAPI_0002.tif	3	Untreated	6		DAPI
+CompBiotreated_DAPI_0003.tif	3	Untreated	7		DAPI
+CompBiotreated_DAPI_0004.tif	3	Untreated	8		DAPI
+CompBiotreated_GFP_0001.tif	3	Untreated	5		GFP
+CompBiotreated_GFP_0002.tif	3	Untreated	6		GFP
+CompBiotreated_GFP_0003.tif	3	Untreated	7		GFP
+CompBiotreated_GFP_0004.tif	3	Untreated	8		GFP
+CompBiotreated_RGB_0001.tif	3	Untreated	5		RGB
+CompBiotreated_RGB_0002.tif	3	Untreated	6		RGB
+CompBiotreated_RGB_0003.tif	3	Untreated	7		RGB
+CompBiotreated_RGB_0004.tif	3	Untreated	8		RGB
+CompBiotreated_TRANS_0001.tif	3	Untreated	5		TRANS
+CompBiotreated_TRANS_0002.tif	3	Untreated	6		TRANS
+CompBiotreated_TRANS_0003.tif	3	Untreated	7		TRANS
+CompBiotreated_TRANS_0004.tif	3	Untreated	8		TRANS
+SectionA_G4_WT_C1_TRANS	4	Untreated	1		TRANS
+SectionA_G4_WT_C1_DAPI	4	Untreated	1		DAPI
+SectionA_G4_WT_C1_GFP	4	Untreated	1		GFP
+SectionA_G4_WT_C2_TRANS	4	Untreated	2		TRANS
+SectionA_G4_WT_C2_DAPI	4	Untreated	2		DAPI
+SectionA_G4_WT_C2_GFP	4	Untreated	2		GFP
+SectionA_G4_WT_C3_TRANS	4	Untreated	3		TRANS
+SectionA_G4_WT_C3_DAPI	4	Untreated	3		DAPI
+SectionA_G4_WT_C3_GFP	4	Untreated	3		GFP
+SectionA_G4_WT_C4_TRANS	4	Untreated	4		TRANS
+SectionA_G4_WT_C4_DAPI	4	Untreated	4		DAPI
+SectionA_G4_WT_C4_GFP	4	Untreated	4		GFP
+SectionA_G4_EX_C5_TRANS	4	Treated	5		TRANS
+SectionA_G4_EX_C5_DAPI	4	Treated	5		DAPI
+SectionA_G4_EX_C5_GFP	4	Treated	5		GFP
+SectionA_G4_EX_C6_TRANS	4	Treated	6		TRANS
+SectionA_G4_EX_C6_DAPI	4	Treated	6		DAPI
+SectionA_G4_EX_C6_GFP	4	Treated	6		GFP
+SectionA_G4_EX_C7_TRANS	4	Treated	7		TRANS
+SectionA_G4_EX_C7_DAPI	4	Treated	7		DAPI
+SectionA_G4_EX_C7_GFP	4	Treated	7		GFP
+SectionA_G4_EX_C8_TRANS	4	Treated	8		TRANS
+SectionA_G4_EX_C8_DAPI	4	Treated	8		DAPI
+SectionA_G4_EX_C8_GFP	4	Treated	8		GFP
+G7_Well1_Col9_Field1_D.tif	5	Treated	1	1	DAPI
+G7_Well1_Col9_Field1_G.tif	5	Treated	1	1	GFP
+G7_Well1_Col9_Field1_T.tif	5	Treated	1	1	TRANS
+G7_Well2_Col9_Field1_D.tif	5	Treated	2	1	DAPI
+G7_Well2_Col9_Field1_G.tif	5	Treated	2	1	GFP
+G7_Well2_Col9_Field1_T.tif	5	Treated	2	1	TRANS
+G7_Well3_Col9_Field1_D.tif	5	Treated	3	1	DAPI
+G7_Well3_Col9_Field1_G.tif	5	Treated	3	1	GFP
+G7_Well3_Col9_Field1_T.tif	5	Treated	3	1	TRANS
+G7_Well4_Col9_Field1_D.tif	5	Treated	4	1	DAPI
+G7_Well4_Col9_Field1_G.tif	5	Treated	4	1	GFP
+G7_Well4_Col9_Field1_T.tif	5	Treated	4	1	TRANS
+SectionA_G1_W1_blue.tif	1	Untreated	1		DAPI
+SectionA_G1_W1_DIC.tif	1	Untreated	1		DIC
+SectionA_G1_W1_green.tif	1	Untreated	1		GFP
+SectionA_G1_W2_blue.tif	1	Untreated	2		DAPI
+SectionA_G1_W2_DIC.tif	1	Untreated	2		DAPI
+SectionA_G1_W2_green.tif	1	Untreated	2		GFP
+SectionA_G1_W3_blue.tif	1	Untreated	3		DAPI
+SectionA_G1_W3_DIC.tif	1	Untreated	3		DAPI
+SectionA_G1_W3_green.tif	1	Untreated	3		DAPI
+SectionA_G1_W6_blue.tif	1	Treated	6		DAPI
+SectionA_G1_W6_DIC.tif	1	Treated	6		DAPI
+SectionA_G1_W6_green.tif	1	Treated	6		DAPI
+SectionA_G1_W7_blue.tif	1	Treated	7		DAPI
+SectionA_G1_W7_DIC.tif	1	Treated	7		DAPI
+SectionA_G1_W7_green.tif	1	Treated	7		DAPI
+SectionA_G1_W8_blue.tif	1	Treated	8		DAPI
+SectionA_G1_W8_blue2.tif	1	Treated	8		DAPI
+SectionA_G1_W8_blue3.tif	1	Treated	8		DAPI
+SectionA_G1_W8_DIC.tif	1	Treated	8		DAPI
+SectionA_G1_W8_DIC2.tif	1	Treated	8		DAPI
+SectionA_G1_W8_DIC3.tif	1	Treated	8		DIC
+SectionA_G1_W8_green.tif	1	Treated	8		DAPI
+SectionA_G1_W8_green2.tif	1	Treated	8		DAPI
+SectionA_G1_W8_green3.tif	1	Treated	8		DAPI
