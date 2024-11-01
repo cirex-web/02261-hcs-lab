@@ -1,7 +1,6 @@
 
 from sklearn.ensemble import RandomForestClassifier 
 from sklearn.metrics import roc_curve, roc_auc_score, auc
-from sklearn.datasets import load_breast_cancer 
 from sklearn.model_selection import train_test_split 
 import matplotlib.pyplot as plt
 from sklearn.model_selection import KFold
