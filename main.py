@@ -5,7 +5,7 @@ import roc
 # Task - 1 Treated - Untreated feature discrimination
 # Shortlist: Color Channel,
 import matplotlib.pyplot as plt
-
+import numpy as np
 
 from custom_types import Image
 from features import get_treated_features, get_widefield_features, get_widefield_feature_labels, get_treated_feature_labels
@@ -15,6 +15,9 @@ from features import get_treated_features, get_widefield_features, get_widefield
 def read_image_with_cv(file_path):
     file_path = os.path.abspath(file_path)
     image = skimage.io.imread(file_path,as_gray=True)
+    # p2, p98 = np.percentile(image, (2, 98))
+    # image = skimage.exposure.rescale_intensity(image, in_range=(p2, p98))
+    
     # image = cv2.imread(file_path, cv2.IMREAD_COLOR)
     # image = cv2.threshold(image, find_threshold(image), 255, cv2.THRESH_BINARY)
     # fig, ax = try_all_threshold(image, figsize=(10, 8), verbo/se=False)
@@ -36,7 +39,6 @@ def read_tsv_file(file_path):
     }
     return result
     
-
 
 def get_files(img_directory: str):
     try:
@@ -213,25 +215,66 @@ widefield_images = [img for img in auto_imgs if img.wide_field]
 
 # plt.tight_layout()
 # plt.show(block=False)
+def show_treated_and_untreated_imgs(treated_images,untreated_images):
+    max_images = 2
+    treated_images = treated_images[:max_images]
+    untreated_images = untreated_images[:max_images]
+    fig, axes = plt.subplots(2, max_images, figsize=(20, 4))
 
-# max_images = 10
-# treated_images = treated_images[:max_images]
-# untreated_images = untreated_images[:max_images]
-# fig, axes = plt.subplots(2, max_images, figsize=(20, 4))
+    for i, img in enumerate(treated_images):
+        # Perform blob detection
+        # blobs = skimage.feature.blob_log(img.image, max_sigma=30,min_sigma=10, num_sigma=10, threshold=0.2)
+        
+        # # Overlay circles on the original image
+        # for blob in blobs:
+        #     y, x, r = blob
+        #     c = plt.Circle((x, y), r, color='red', linewidth=2, fill=False)
+        #     axes[0, i].add_patch(c)
 
-# for i, img in enumerate(treated_images):
-#     axes[0, i].imshow(img.image, cmap='gray')
-#     axes[0, i].set_title(get_treated_features(img))
-#     axes[0, i].axis('off')
+        # Using hough line transform
+        # tested_angles = np.linspace(-np.pi / 2, np.pi / 2, 360, endpoint=False)
+        # h, theta, d = skimage.transform.hough_line(img.image, theta=tested_angles)
+        # for _, angle, dist in zip(*skimage.transform.hough_line_peaks(h, theta, d)):
+        #     # y0 = (dist - 0 * np.cos(angle)) / np.sin(angle)
+        #     # y1 = (dist - img.image.shape[1] * np.cos(angle)) / np.sin(angle)
+        #     # axes[0, i].plot((0, img.image.shape[1]), (y0, y1), '-r')
+        #     (x0, y0) = dist * np.array([np.cos(angle), np.sin(angle)])
+        #     axes[0,i].axline((x0, y0), slope=np.tan(angle + np.pi / 2))
 
-# for i, img in enumerate(untreated_images):
-#     axes[1, i].imshow(img.image, cmap='gray')
-#     axes[1, i].set_title(get_treated_features(img))
-#     axes[1, i].axis('off')
+        # using canny edge detection
+        edges = skimage.feature.canny(img.image, sigma=2,low_threshold=0)
+        lines = skimage.transform.probabilistic_hough_line(edges, threshold=10, line_length=100, line_gap=12)
 
-# plt.tight_layout()
-# plt.show(block=False)
+        for line in lines:
+            p0, p1 = line
+            axes[0, i].plot((p0[0], p1[0]), (p0[1], p1[1]), color='red')
+        axes[0, i].imshow(img.image, cmap='gray')
+        # axes[0, i].set_title(get_treated_features(img))
+        axes[0, i].axis('off')
+
+    for i, img in enumerate(untreated_images):
+        # blobs = skimage.feature.blob_log(img.image, max_sigma=30,min_sigma=10, num_sigma=10, threshold=0.2)
+        
+        # # Overlay circles on the original image
+        # for blob in blobs:
+        #     y, x, r = blob
+        #     c = plt.Circle((x, y), r, color='red', linewidth=2, fill=False)
+        #     axes[1, i].add_patch(c)
+
+        edges = skimage.feature.canny(img.image, sigma=2,low_threshold=0)
+        lines = skimage.transform.probabilistic_hough_line(edges, threshold=10, line_length=100, line_gap=12)
+
+        for line in lines:
+            p0, p1 = line
+            axes[1, i].plot((p0[0], p1[0]), (p0[1], p1[1]), color='red')
+        axes[1, i].imshow(img.image, cmap='gray')
+
+        # axes[1, i].set_title(get_treated_features(img))
+        axes[1, i].axis('off')
+
+        plt.tight_layout()
+        plt.show(block=True)
 
 # Main code is here
-classify_widefield_vs_confocal(confocal_images,widefield_images)
-# classify_treated_or_untreated(treated_images,untreated_images)
+# classify_widefield_vs_confocal(confocal_images,widefield_images)
+classify_treated_or_untreated(treated_images,untreated_images)
