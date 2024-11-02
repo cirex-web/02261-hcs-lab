@@ -7,9 +7,12 @@ from skimage.util import view_as_windows
 import numpy as np
 
 def get_line_count(img):
-    edges = skimage.feature.canny(img, sigma=2,low_threshold=0)
-    lines = skimage.transform.probabilistic_hough_line(edges, threshold=10, line_length=100, line_gap=12)
+    # edges = skimage.feature.canny(img, sigma=2,low_threshold=0)
+    # lines = skimage.transform.probabilistic_hough_line(edges, threshold=10, line_length=100, line_gap=12)
 
+    # lowered sigma (more edges), decreased line gap
+    edges = skimage.feature.canny(img, sigma=1)
+    lines = skimage.transform.probabilistic_hough_line(edges, threshold=10, line_length=100, line_gap=3)
     for line in lines:
         p0, p1 = line
         # axes[1, i].plot((p0[0], p1[0]), (p0[1], p1[1]), color='red')

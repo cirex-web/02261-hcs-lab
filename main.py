@@ -15,8 +15,8 @@ from features import get_treated_features, get_widefield_features, get_widefield
 def read_image_with_cv(file_path):
     file_path = os.path.abspath(file_path)
     image = skimage.io.imread(file_path,as_gray=True)
-    # p2, p98 = np.percentile(image, (2, 98))
-    # image = skimage.exposure.rescale_intensity(image, in_range=(p2, p98))
+    p2, p98 = np.percentile(image, (1, 99))
+    image = skimage.exposure.rescale_intensity(image, in_range=(p2, p98))
     
     # image = cv2.imread(file_path, cv2.IMREAD_COLOR)
     # image = cv2.threshold(image, find_threshold(image), 255, cv2.THRESH_BINARY)
@@ -177,10 +177,12 @@ def load_in_all_imgs():
         for file_name, v in img_data_dict.items()
         if file_name in manual_file_names
     ]
-    automated_imgs = [
-        get_properties_of_automated_file(file_name)
-        for file_name in get_files("HCS Images/Automated HCS Images/")
-    ]
+    automated_imgs = [] 
+    # or [
+    #     get_properties_of_automated_file(file_name)
+    #     for file_name in get_files("HCS Images/Automated HCS Images/")
+    # ]
+    
 
     # print(automated_data_dict, len(automated_data_dict))
 
@@ -215,12 +217,18 @@ widefield_images = [img for img in auto_imgs if img.wide_field]
 
 # plt.tight_layout()
 # plt.show(block=False)
+
+def get_lines(image):
+
+    edges = skimage.feature.canny(image[:-200,:], sigma=5)
+    lines = skimage.transform.probabilistic_hough_line(edges, threshold=10, line_length=100, line_gap=5)
+    return lines
 def show_treated_and_untreated_imgs(treated_images,untreated_images):
-    max_images = 2
+    max_images = 10
     treated_images = treated_images[:max_images]
     untreated_images = untreated_images[:max_images]
     fig, axes = plt.subplots(2, max_images, figsize=(20, 4))
-
+    print(len(treated_images),len(untreated_images))
     for i, img in enumerate(treated_images):
         # Perform blob detection
         # blobs = skimage.feature.blob_log(img.image, max_sigma=30,min_sigma=10, num_sigma=10, threshold=0.2)
@@ -242,10 +250,7 @@ def show_treated_and_untreated_imgs(treated_images,untreated_images):
         #     axes[0,i].axline((x0, y0), slope=np.tan(angle + np.pi / 2))
 
         # using canny edge detection
-        edges = skimage.feature.canny(img.image, sigma=2,low_threshold=0)
-        lines = skimage.transform.probabilistic_hough_line(edges, threshold=10, line_length=100, line_gap=12)
-
-        for line in lines:
+        for line in get_lines(img.image):
             p0, p1 = line
             axes[0, i].plot((p0[0], p1[0]), (p0[1], p1[1]), color='red')
         axes[0, i].imshow(img.image, cmap='gray')
@@ -261,10 +266,7 @@ def show_treated_and_untreated_imgs(treated_images,untreated_images):
         #     c = plt.Circle((x, y), r, color='red', linewidth=2, fill=False)
         #     axes[1, i].add_patch(c)
 
-        edges = skimage.feature.canny(img.image, sigma=2,low_threshold=0)
-        lines = skimage.transform.probabilistic_hough_line(edges, threshold=10, line_length=100, line_gap=12)
-
-        for line in lines:
+        for line in get_lines(img.image):
             p0, p1 = line
             axes[1, i].plot((p0[0], p1[0]), (p0[1], p1[1]), color='red')
         axes[1, i].imshow(img.image, cmap='gray')
@@ -273,8 +275,9 @@ def show_treated_and_untreated_imgs(treated_images,untreated_images):
         axes[1, i].axis('off')
 
         plt.tight_layout()
-        plt.show(block=True)
+    plt.show(block=True)
 
 # Main code is here
 # classify_widefield_vs_confocal(confocal_images,widefield_images)
+show_treated_and_untreated_imgs(treated_images,untreated_images)
 classify_treated_or_untreated(treated_images,untreated_images)
