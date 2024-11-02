@@ -9,6 +9,7 @@ import numpy as np
 def get_line_count(img):
     edges = skimage.feature.canny(img, sigma=2,low_threshold=0)
     lines = skimage.transform.probabilistic_hough_line(edges, threshold=10, line_length=100, line_gap=12)
+    # lines = skimage.transform.probabilistic_hough_line(edges, threshold=10, line_length=70, line_gap=12)
 
     for line in lines:
         p0, p1 = line
@@ -21,6 +22,24 @@ def get_blob_count(img):
 def get_edge_px_length(img):
   sub_edges = feature.canny(img, sigma=3)
   return sum(map(sum, sub_edges))
+
+def get_avg_intensity_near_blobs(img):
+    blobs = skimage.feature.blob_log(img, max_sigma=30,min_sigma=10, num_sigma=10)
+    intensities = []
+    ixs = np.indices(img.shape)
+    if len(blobs) == 0:
+      return 0
+    for blob in blobs[:10]:
+      y, x, r = blob
+      blob_center = np.array([y, x])[:, np.newaxis, np.newaxis]
+      mask = ((ixs - blob_center)**2).sum(axis=0) < r**2
+      # rr, cc = skimage.draw.circle(y, x, r, shape=img.shape)
+      # avg_intensity = np.mean(img[rr, cc])
+      intensities.append(img[mask].mean())
+      # print(f"Blob at ({y}, {x}) with radius {r} has average intensity {avg_intensity}")
+    return sum(intensities)/len(intensities)
+
+
 # make sure to update get_widefield_feature_labels as well
 def get_treated_features(img:Image):
   cropped_image = img.image[:-150, :]
@@ -31,8 +50,9 @@ def get_treated_features(img:Image):
   print(features)
   return features
 
+
 def get_treated_feature_labels():
-  return ["line count"]
+  return ["line count","blob avg. intensity"]
   # return ["blob count","edge px count","edge count/blob count"]
 
 def get_widefield_features(img:Image):

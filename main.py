@@ -15,8 +15,8 @@ from features import get_treated_features, get_widefield_features, get_widefield
 def read_image_with_cv(file_path):
     file_path = os.path.abspath(file_path)
     image = skimage.io.imread(file_path,as_gray=True)
-    # p2, p98 = np.percentile(image, (2, 98))
-    # image = skimage.exposure.rescale_intensity(image, in_range=(p2, p98))
+    p2, p98 = np.percentile(image, (2, 99))
+    image = skimage.exposure.rescale_intensity(image)
     
     # image = cv2.imread(file_path, cv2.IMREAD_COLOR)
     # image = cv2.threshold(image, find_threshold(image), 255, cv2.THRESH_BINARY)
@@ -192,8 +192,8 @@ def load_in_all_imgs():
 manual_imgs, auto_imgs = load_in_all_imgs()
 treated_images = [img for img in manual_imgs if img.treated and img.channel == "GFP"]
 untreated_images = [img for img in manual_imgs if not img.treated and img.channel == "GFP"]
-# [img for img in manual_imgs if img.channel == "GFP" or img.channel=="DAPI"]+
-confocal_images =  [img for img in auto_imgs if not img.wide_field]
+# 
+confocal_images =  [img for img in manual_imgs if img.channel == "GFP" or img.channel=="DAPI"]+[img for img in auto_imgs if not img.wide_field]
 widefield_images = [img for img in auto_imgs if img.wide_field]
 
 
@@ -276,5 +276,5 @@ def show_treated_and_untreated_imgs(treated_images,untreated_images):
         plt.show(block=True)
 
 # Main code is here
-# classify_widefield_vs_confocal(confocal_images,widefield_images)
-classify_treated_or_untreated(treated_images,untreated_images)
+classify_widefield_vs_confocal(confocal_images,widefield_images)
+# classify_treated_or_untreated(treated_images,untreated_images)
